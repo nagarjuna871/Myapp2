@@ -1,0 +1,19 @@
+pipeline {
+    agent {
+  label 'jenkins-master'
+         }
+
+    stages {
+        stage('Compile') {
+            steps {
+		powershell 'mvn compile'
+            }
+        }
+
+    stage ('test'){
+        steps{ 
+            powershell 'mvn test'
+             }
+       }
+    }
+}
