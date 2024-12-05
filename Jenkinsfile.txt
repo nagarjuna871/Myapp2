@@ -6,9 +6,9 @@ pipeline {
 
 
     stages {
-        stage('Compile') {
+        stage('checkout fom scm') {
             steps {
-		powershell 'mvn compile'
+		git branch: 'main', url: 'git@github.com:nagarjuna871/Myapp2.git'
             }
         }
 
