@@ -1,7 +1,7 @@
 pipeline {
     agent {
   label 'jenkins-master'
-}
+         }
     stages {
             stage('compile') {
                 steps {
@@ -11,7 +11,7 @@ pipeline {
         
             stage('junit') {
                steps {
-                    powershell 'mvn test'
+                    bat 'mvn test'
                   }
               }
         
