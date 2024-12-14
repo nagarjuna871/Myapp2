@@ -2,10 +2,6 @@ pipeline {
     agent {
   label 'jenkins-master'
          }
-options {
-  timestamps()
-  buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '2', numToKeepStr: '3')
-}
 
     stages {
         stage('Compile') {
