@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                powershell 'mvn compile -DVer=$env:Version'
+                bat 'mvn compile -DVer=$env:Version'
             }
         }
         
