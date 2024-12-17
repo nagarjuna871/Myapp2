@@ -1,49 +1,36 @@
 pipeline {
     agent {
-        label 'jenkins-master'
-    }
-    
-    environment {
-        Version = '1.0.0' // Set a default version
-    }
-    
+  label 'jenkins-master'
+         }
+
     stages {
         stage('Compile') {
             steps {
-                bat 'mvn compile -DVer=$env:Version'
+		bat 'mvn compile -DVer=$Version'
             }
         }
+        
         
         stage('Junit') {
             steps {
-                bat 'mvn test -DVer=%Version%'
-            }
+		bat 'mvn test -DVer=$Version'
+                  }
         }
-        
         stage('Package') {
             steps {
-                bat 'mvn -DskipTests clean package -DVer=%Version%'
-            }
+		bat 'mvn -DskipTests clean package -DVer=$Version'
+                  }
         }
 
         stage('Upload package into Nexus') {
             steps {
-                bat 'mvn -DskipTests deploy -DVer=%Version%'
-            }
+		bat 'mvn -DskipTests deploy -DVer=$Version'
+                  }
         }        
-        
         stage('Cleanup Workspace') {
             steps {
                 cleanWs()
             }
-        }
-    }
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed. Please check the logs for details.'
         }
     }
 }
